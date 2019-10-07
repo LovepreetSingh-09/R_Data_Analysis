@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570383587667.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3642541943",
+    "id" : "B945612D",
+    "lastKnownWriteTime" : 1570472657,
+    "last_content_update" : 1570472657926,
+    "path" : "~/R/R_Data_Analysis/ggplot_Visualization.R",
+    "project_path" : "ggplot_Visualization.R",
+    "properties" : {
+        "cursorPosition" : "104,47",
+        "scrollLine" : "88",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
