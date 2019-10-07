@@ -49,8 +49,58 @@ ggplot(data=mpg,mapping=aes(x=displ,y=hwy))+
   geom_smooth(data=filter(mpg,class=='subcompact'),se=TRUE)
 
 
+# Bar Charts
+diamonds
+str(diamonds) 
+summary(diamonds)
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut))
+# This is same as the previous one becoz every geom has default stat and vice-versa
+ggplot(data=diamonds)+stat_count(mapping=aes(x=cut))
+# count is the default value for the geom_bar where as geo_col uses stat_identity as the default
+# Geom_col represent the values instead of count
+?geom_bar
+ggplot(data=diamonds)+geom_col(mapping=aes(x=cut,y=price))
 
+demo <- tribble( ~a, ~b,
+  "bar_1", 20,
+  "bar_2", 30,
+  "bar_3", 40)
+demo
+# for presenting the raw values of x with y use stat='identity' while using geom_bar
+ggplot(data=demo)+geom_bar(mapping=aes(x=a,y=b),stat='identity')
 
+# using proportion in geom_bar  and group means to group the values with respect to whole data
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,y=..prop..,group=1))
 
+# creating a summary using stat_summary
+ggplot(data=diamonds)+stat_summary(mapping=aes(x=cut,y=depth),fun.ymin=min,fun.ymax=max,fun.y=median)
+?stat_summary
+?stat_smooth # same as geom_smooth
 
+# Color is used for edge colors
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,color=cut))
+# fill is used to color the bar
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=cut))
+
+# for a stacked bar chart
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=clarity))
+
+# position = "identity" will place each object exactly where it falls in the context of the graph. 
+# This is not very useful for bars, because it overlaps them as you can see from the foll9wing graphs.
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=clarity,alpha=1/5),position = "identity")
+ggplot(data = diamonds,mapping = aes(x = cut, color = clarity)) +
+  geom_bar(fill = NA, position = "identity")
                                 
+# position = "fill" works like stacking, but makes each set of stacked bars the same height.
+# This makes it easier to compare proportions across groups.
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=clarity),position='fill')
+
+# position = "dodge" places overlapping objects directly beside one another.
+# This makes it easier to compare individual values:
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=clarity),position='dodge')
+
+# position = "jitter" adds a small amount of random noise to each point.
+# This is useful where two data points overlaps because those 2 points are not likely to get same random noise.
+ggplot(data=mpg)+geom_point(mapping=aes(x=displ,y=hwy),position='jitter')
+# We can use the geom_jitter for the same thing
+ggplot(data=mpg)+geom_jitter(mapping=aes(x=displ,y=hwy))
