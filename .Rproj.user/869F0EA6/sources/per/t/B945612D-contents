@@ -1,3 +1,4 @@
+library(maps)
 library(tidyverse)
 ggplot2::ggplot()
 mpg
@@ -104,3 +105,31 @@ ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=clarity),position='dodge')
 ggplot(data=mpg)+geom_point(mapping=aes(x=displ,y=hwy),position='jitter')
 # We can use the geom_jitter for the same thing
 ggplot(data=mpg)+geom_jitter(mapping=aes(x=displ,y=hwy))
+?geom_jitter
+
+# Co-ordinate Systems
+ggplot(data = mpg, mapping = aes(x = class, y = hwy))+
+  geom_boxplot()
+# for flipping the x-y axis
+ggplot(data = mpg, mapping = aes(x = class, y = hwy))+
+  geom_boxplot()+coord_flip()
+?geom_boxplot
+
+nz=map_data('nz')
+str(nz)
+ggplot(data=nz)+geom_polygon(aes(x=long,y=lat,group=group),fill='white',color='black')
+# Compressing the graph size
+ggplot(data=nz)+geom_polygon(aes(x=long,y=lat,group=group),fill='white',color='black')+
+  coord_quickmap()
+
+ggplot(data=diamonds)+
+  geom_bar(mapping=aes(x=cut,fill=cut),show.legend = FALSE,width=1)+
+  theme(aspect.ratio=1)+labs(x=NULL,y=NULL)+
+  coord_flip()
+# Combinationn of bar chart and pie-chart
+ggplot(data=diamonds)+
+  geom_bar(mapping=aes(x=cut,fill=cut),show.legend = FALSE,width=1)+
+  theme(aspect.ratio=1)+labs(x=NULL,y=NULL)+
+  coord_polar()
+  
+
