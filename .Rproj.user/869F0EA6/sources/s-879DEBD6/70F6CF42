@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570556514872.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4062488890",
+    "id" : "70F6CF42",
+    "lastKnownWriteTime" : 1570559162,
+    "last_content_update" : 1570559162998,
+    "path" : "~/R/R_Data_Analysis/dplyr_analysis.R",
+    "project_path" : "dplyr_analysis.R",
+    "properties" : {
+        "cursorPosition" : "52,0",
+        "scrollLine" : "39",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
