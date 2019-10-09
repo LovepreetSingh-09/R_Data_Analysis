@@ -129,6 +129,80 @@ delay <- flights %>% group_by(dest) %>%
   filter(count>20,dest!='HNL')
 delay  
 
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay),!is.na(arr_delay))
 
+not_cancelled %>% group_by(year,month,day) %>% 
+  summarize(mean=mean(dep_delay))
+
+delays=not_cancelled %>% group_by(tailnum) %>% summarize(delay=mean(arr_delay))
+ggplot(data=delays)+geom_freqpoly(mapping=aes(x=delay),binwidth=10)
+
+delays=not_cancelled %>% group_by(tailnum) %>% summarize(delay=mean(arr_delay),count=n(),na.rm=TRUE)
+ggplot(data=delays)+geom_point(mapping=aes(x=delay,y=count),alpha=1/10)
+
+# Neglecting the first first 25 counts
+delays %>% filter(count>25) %>% ggplot(mapping=aes(x=delay,y=count))+
+  geom_point(alpha=1/10)
+
+batting <- as_tibble(Lahman::Batting)
+
+batters=batting %>% group_by(playerID) %>%
+  summarize(ba=sum(H,na.rm=TRUE)/sum(AB,na.rm=TRUE),ab=sum(AB,na.rm=TRUE))
+batters
+
+batters %>% filter(ab>25) %>% ggplot(mapping=aes(x=ab,y=ba))+
+  geom_point() + geom_smooth(se=FALSE)
+
+not_cancelled %>% group_by(year,month,day) %>% 
+  summarize(avg_delay1=mean(arr_delay),avg_delay2=mean(arr_delay[arr_delay>0]))
+
+not_cancelled %>% group_by(dest) %>%
+  summarize(sd=sd(distance)) %>% arrange(desc(sd))
+
+not_cancelled %>% group_by(year, month, day) %>%
+  summarize(first = min(dep_time),last = max(dep_time))
+# We can also use first() and last() at the place of min and max
+not_cancelled %>%group_by(year, month, day) %>%
+  summarize(first_dep = first(dep_time),last_dep = last(dep_time))
+
+not_cancelled %>%group_by(year, month, day) %>%
+  mutate(r = min_rank(desc(dep_time))) %>%filter(r %in% range(r))
+
+# For calculating the unique values
+not_cancelled %>% group_by(dest) %>%
+  summarize(carriers=n_distinct(carrier)) %>% arrange(desc(carriers))
+
+not_cancelled %>% count(dest)
+
+# We can use the count of variable with the weight or on the basis of other variables
+not_cancelled %>% count(tailnum, wt = distance)
+
+not_cancelled %>% group_by(year, month, day) %>%
+  summarize(n_early = sum(dep_time < 500))
+
+# What proportion of flights are delayed by more than an hour?
+not_cancelled %>% group_by(year, month, day) %>%
+  summarize(hour_perc = mean(arr_delay > 60))
+
+daily <- group_by(flights, year, month, day)
+daily
+# daily no. of flights
+(per_day <- summarize(daily, flights = n()))
+# Monthly no. of flights
+(per_month <- summarize(per_day, flights = sum(flights)))
+# Yearly no. of flights
+(per_year <- summarize(per_month, flights = sum(flights)))
+
+daily %>% ungroup() %>% 
+  summarize(flights = n())
+
+popular_dests <- flights %>% group_by(dest) %>%
+  filter(n() > 365)
+popular_dests
+
+popular_dests %>% filter(arr_delay > 0) %>%
+  mutate(prop_delay = arr_delay / sum(arr_delay)) %>%
+  select(year:day, dest, arr_delay, prop_delay)
 
 
