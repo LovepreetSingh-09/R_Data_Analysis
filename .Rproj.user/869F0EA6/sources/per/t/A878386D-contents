@@ -1,5 +1,6 @@
 library(tidyverse)
 library(nycflights13)
+library(hexbin)
 
 nycflights13::flights
 str(flights)
@@ -13,6 +14,7 @@ diamonds %>%count(cut)
 
 # Continuous
 ggplot(data = diamonds) + geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+# Making bins of carat
 diamonds %>% count(cut_width(carat, 0.5))
 
 smaller <- diamonds %>%filter(carat < 3)
@@ -70,3 +72,40 @@ diamonds %>% count(color, cut) %>%
   ggplot(mapping = aes(x = color, y = cut)) +
   geom_tile(mapping = aes(fill = n))
 
+ggplot(diamonds) + 
+  geom_point(aes(x=carat,y=price),color='green',alpha=1/10)
+
+# for creating 2D bins which are actually shown as small box for x and y values
+ggplot(diamonds) + 
+  geom_bin2d(aes(x=carat,y=price))
+
+# This is same as previous but it is shown as hexagonal instead of box
+ggplot(diamonds) + 
+  geom_hex(aes(x=carat,y=price))
+
+# Boxplot on the carat bins
+ggplot(smaller,mapping=aes(x=carat,y=price)) + 
+  geom_boxplot(aes(group=cut_width(carat,0.1)))
+
+# displaying same no. of ponts in each bin this will change the bin width
+# Here 5 is the no. pf boxplots
+ggplot(smaller,mapping=aes(x=carat,y=price)) + 
+  geom_boxplot(aes(group=cut_number(carat,5)))
+
+ggplot(diamonds, aes(x = cut_number(carat, 5), y = price, color = cut)) +
+  geom_boxplot()
+
+ggplot(diamonds, aes(colour = cut_number(carat, 5), y = price, x = cut)) +
+  geom_boxplot()
+
+library(modelr)
+mod <- lm(log(price) ~ log(carat), data = diamonds)
+diamonds2 <- diamonds %>%
+  add_residuals(mod) %>%
+  mutate(resid = exp(resid))
+
+ggplot(data = diamonds2) +
+  geom_point(mapping = aes(x = carat, y = resid))
+
+ggplot(data = diamonds2) +
+  geom_boxplot(mapping = aes(x = cut, y = resid))
