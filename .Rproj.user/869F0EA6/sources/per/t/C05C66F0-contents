@@ -113,12 +113,99 @@ challenge <- read_csv(
     y = col_date() ))
 tail(challenge)
 
+# reading more than maximum limit of 1000 values of a row
+challenge2 <- read_csv(
+  readr_example("challenge.csv"),
+  guess_max = 1001
+)
+challenge2
 
+# reading variables as character
+challenge2 <- read_csv(readr_example("challenge.csv"),
+                       col_types = cols(.default = col_character()) )
+challenge2
 
+df <- tribble(
+  ~x, ~y,
+  "1", "1.21",
+  "2", "2.32",
+  "3", "4.56"
+)
+df
+# conveting the suitable datatype of each variable
+type_convert(df)
 
+write_csv(challenge, "challenge-2.csv")
+read_csv("challenge-2.csv")
 
+# rds store data in R’s custom binary format called RDS
+write_rds(challenge, "challenge.rds")
+read_rds("challenge.rds")
 
+# The feather package implements a fast binary file format that 
+# can be shared across programming languages
+library(feather)
+write_feather(challenge, "challenge.feather")
+read_feather("challenge.feather")
 
+table1
+table2
+table3
+table4a
+table4b
+
+table1 %>%
+  mutate(rate = cases / population * 10000)
+table1 %>%
+  count(year, wt = cases)
+library(ggplot2)
+ggplot(table1, aes(year, cases)) +
+  geom_line(aes(group = country), color = "grey50") +
+  geom_point(aes(color = country))
+
+# gathering shortens the data table width
+table4a
+gather(table4a,'1999','2000',key='year',value='cases')
+table4b %>%
+  gather(`1999`, `2000`, key = "year", value = "population")
+
+tidy4a <- table4a %>%
+  gather(`1999`, `2000`, key = "year", value = "cases")
+tidy4b <- table4b %>%
+  gather(`1999`, `2000`, key = "year", value = "population")
+
+left_join(tidy4a, tidy4b)
+
+# Spreading increases the data width
+table2
+spread(table2, key=type, value=count)
+
+# separate() pulls apart one column into multiple columns, by splitting
+# wherever a separator character appears.
+table3
+separate(table3,rate,into=c('cases','population'))
+# We can aslo use a separate argument
+table3 %>%
+  separate(rate, into = c("cases", "population"), sep = "/")
+
+# separate make the columns as char type by default
+# But we can change it to a better type using convvert=TRUE
+table3 %>%
+  separate(
+    rate,
+    into = c("cases", "population"),
+    convert = TRUE
+  )
+# We can also separate a column using the position number
+table3 %>%
+  separate(year, into = c("century", "year"), sep = 2)
+
+# Unite
+table5
+unite(table5,new,century, year)
+# unite unite the values of two columns using default _ sign
+table5 %>%
+  unite(new, century, year, sep = "")
 
 
 
