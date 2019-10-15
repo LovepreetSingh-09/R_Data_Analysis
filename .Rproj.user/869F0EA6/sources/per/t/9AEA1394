@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571158617900.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3505866326",
+    "id" : "9AEA1394",
+    "lastKnownWriteTime" : 1571159434,
+    "last_content_update" : 1571159434950,
+    "path" : "~/R/R_Data_Analysis/stringr.R",
+    "project_path" : "stringr.R",
+    "properties" : {
+        "cursorPosition" : "29,24",
+        "scrollLine" : "7",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

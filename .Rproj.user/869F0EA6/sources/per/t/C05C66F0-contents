@@ -19,7 +19,7 @@ lubridate::now()
 
 # Displaying all columns
 nycflights13::flights %>%
-  print(n = 10, width = Inf)
+  print(n = 15, width = Inf)
 
 class(as.data.frame(flights))
 
@@ -207,5 +207,36 @@ unite(table5,new,century, year)
 table5 %>%
   unite(new, century, year, sep = "")
 
+stocks <- tibble(
+  year = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
+  qtr = c( 1, 2, 3, 4, 2, 3, 4),
+  return = c(1.88, 0.59, 0.35, NA, 0.92, 0.17, 2.66)
+)
+b=spread(stocks,key=year,value=return)
+gather(b,key=year,value=return, `2015` , `2016` ,na.rm=TRUE)
 
+# complete will show all the explicit missing values and complete the whole tibble
+complete(stocks,year,return)
 
+treatment <- tribble(
+  ~ person, ~ treatment, ~response,
+  "Derrick Whitmore", 1, 7,
+  NA, 2, 10,
+  NA, 3, 9,
+  "Katherine Burke", 1, 4
+)
+# fill fills the missing values with the most recent value
+treatment
+fill(treatment,person)
+
+who
+who1=gather(who,new_sp_m014:newrel_f65,key='key',value='count',na.rm=TRUE)
+count(who1,key)
+who2=mutate(who1,key=stringr::str_replace(key,'newrel','new_rel'))
+who2
+who2=separate(who2,key,into=c('class','category','age'),sep='_')
+who2 %>% count(class)
+who2=select(who2,-class,-iso2,-iso3)
+who2
+who_final=separate(who2,age,into=c('gender','age'),sep=1)
+who_final
