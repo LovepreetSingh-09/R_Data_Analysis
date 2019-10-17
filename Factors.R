@@ -70,10 +70,71 @@ rincome <- gss_cat %>%
   )
 rincome
 
-ggplot( rincome,aes(age, fct_reorder(rincome, age)))
-        + geom_point()
+ggplot( rincome, aes(age, fct_reorder(rincome, age))) +
+  geom_point()
 
+# fct_relevel brings the specified level at the front here 'Not applicable'
+ggplot( rincome, aes(age, fct_relevel(rincome, "Not applicable"))) +
+  geom_point()
 
+gss_cat %>% filter(!is.na(age)) %>%count(marital)
+by_age <- gss_cat %>% filter(!is.na(age)) %>%
+  group_by(age, marital) %>% count() %>%
+  mutate(prop = n / sum(n)) 
+by_age
 
+ggplot(by_age, aes(age, n, color = marital)) +
+  geom_line(na.rm = TRUE)
+# fct_reorder2() reorders the factor by the y values associated with the largest x values.
+ggplot( by_age,aes(age, n, color = fct_reorder2(marital, age, n))) +
+  geom_line() +labs(color = "marital")
 
+# fct_infreq() to order levels in increasing frequency
+# but in ggplot it displayed graph in decreasing order so use fct_rev to reverse the level
+gss_cat %>%
+  mutate(marital = marital %>% fct_infreq() %>% fct_rev()) %>%
+  ggplot(aes(marital)) +
+  geom_bar()
+m=gss_cat %>%
+  transmute(marital = marital %>% fct_infreq() %>% fct_rev()) %>% count(marital)
+print(m$marital)
 
+# Modifying Values using fct_recode()
+gss_cat %>% count(partyid)
+gss_cat %>% mutate(partyid = fct_recode(partyid,
+                              "Republican, strong" = "Strong republican",
+                              "Republican, weak" = "Not str republican",
+                              "Independent, near rep" = "Ind,near rep",
+                              "Independent, near dem" = "Ind,near dem",
+                              "Democrat, weak" = "Not str democrat",
+                              "Democrat, strong" = "Strong democrat" )) %>%
+  count(partyid)
+# We can also combine groups or collapse(combine) using fct_recode
+gss_cat %>% mutate(partyid = fct_recode(partyid,
+                              "Republican, strong" = "Strong republican",
+                              "Republican, weak" = "Not str republican",
+                              "Independent, near rep" = "Ind,near rep",
+                              "Independent, near dem" = "Ind,near dem",
+                              "Democrat, weak" = "Not str democrat",
+                              "Democrat, strong" = "Strong democrat",
+                              "Other" = "No answer",
+                              "Other" = "Don't know",
+                              "Other" = "Other party")) %>%
+  count(partyid)
+
+gss_cat %>%mutate(partyid = fct_collapse(partyid,
+                                other = c("No answer", "Don't know", "Other party"),
+                                rep = c("Strong republican", "Not str republican"),
+                                ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+                                dem = c("Not str democrat", "Strong democrat"))) %>%
+  count(partyid)
+
+# fct_lump combines or lump the all small groups together
+gss_cat %>%
+  mutate(relig = fct_lump(relig)) %>%
+  count(relig)
+# give n value to decide the total no. of groups after lump
+gss_cat %>%
+  mutate(relig = fct_lump(relig, n = 10)) %>%
+  count(relig, sort = TRUE) %>%
+  print(n = Inf)
