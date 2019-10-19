@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571504761136.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3186983468",
+    "id" : "B3BCCC8C",
+    "lastKnownWriteTime" : 1571505995,
+    "last_content_update" : 1571505995241,
+    "path" : "~/R/R_Data_Analysis/Pipes_and_Functions.R",
+    "project_path" : "Pipes_and_Functions.R",
+    "properties" : {
+        "cursorPosition" : "37,0",
+        "scrollLine" : "18",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
