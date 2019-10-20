@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571590473589.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2322336252",
+    "id" : "8F125EE6",
+    "lastKnownWriteTime" : 1571591074,
+    "last_content_update" : 1571591074621,
+    "path" : "~/R/R_Data_Analysis/Vectors.R",
+    "project_path" : "Vectors.R",
+    "properties" : {
+        "cursorPosition" : "29,0",
+        "scrollLine" : "6",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
