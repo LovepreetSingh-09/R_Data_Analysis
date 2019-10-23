@@ -173,9 +173,3 @@ iris %>%
 iris %>%
   discard(is.factor) %>%
   str()
-
-
-
-
-
-
