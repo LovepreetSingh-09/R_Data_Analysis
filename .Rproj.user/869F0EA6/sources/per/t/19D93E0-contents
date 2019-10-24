@@ -158,3 +158,97 @@ ggplot(sim2, aes(x)) +
   )
 tibble(x = "e") %>%
   add_predictions(mod2)
+
+ggplot(sim3, aes(x1, y)) +
+  geom_point(aes(color = x2))
+
+sim3 
+mod1 <- lm(y ~ x1 + x2, data = sim3)
+mod2 <- lm(y ~ x1 * x2, data = sim3)
+mod1
+mod2
+
+# data_grid() finds all the unique values of x1 and x2 and then generates all combinations.
+data_grid(sim3,x1,x2)
+# gather_predictions to generate predictions form both the models
+grid=sim3%>% data_grid(x1,x2) %>%
+  gather_predictions(mod1,mod2)
+print(grid,n=Inf,width=Inf)
+
+ggplot(sim3, aes(x1, y, color = x2)) +
+  geom_point() + geom_line(data = grid, aes(y = pred)) +
+  facet_wrap(~model)
+
+sim3 <- sim3 %>%
+  gather_residuals(mod1, mod2)
+sim3
+ggplot(sim3, aes(x1, resid, color = x2)) +
+  geom_point() +
+  facet_grid(model ~ x2)
+
+sim4
+
+seq_range(c(1:10), 5)
+
+mod1 <- lm(y ~ x1 + x2, data = sim4)
+mod2 <- lm(y ~ x1 * x2, data = sim4)
+grid <- sim4 %>%
+  data_grid(
+    x1 = seq_range(x1, 5),
+    x2 = seq_range(x2, 5)
+  ) %>%
+  gather_predictions(mod1, mod2)
+grid
+
+seq_range(c(0.0123, 0.923423), n = 5)
+#> pretty=TRUE means converting the fraction variable into a  round one
+seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)
+
+x1 <- rcauchy(100)
+x1
+rm(x1)
+seq_range(x1, n = 5)
+seq_range(x1, n = 5, trim = 0.10)
+# trim = 0.1 will trim off 10% of the tail values of the distribution
+seq_range(x1, n = 5, trim = 0.25)
+seq_range(x1, n = 5, trim = 0.50)
+
+x2 <- c(0, 1)
+seq_range(x2, n = 5)
+# expand = 0.1 is in some sense the opposite of trim() equally for both sides 
+seq_range(x2, n = 5, expand = 0.10)
+seq_range(x2, n = 5, expand = 0.25)
+seq_range(x2, n = 5, expand = 0.50)
+
+ggplot(grid, aes(x1, x2)) +
+  geom_tile(aes(fill = pred)) +
+  facet_wrap(~ model)
+
+ggplot(grid, aes(x1, pred, color = x2, group = x2)) +
+  geom_line() +
+  facet_wrap(~ model)
+
+ggplot(grid, aes(x2, pred, color = x1, group = x1)) +
+  geom_line() +
+  facet_wrap(~ model)
+
+# use model_matrix() to see exactly what equation lm() is fitting
+df <- tribble(
+  ~y, ~x,
+  1, 1,
+  2, 2,
+  3, 3
+)
+model_matrix(df, y ~ x^2 + x)
+model_matrix(df, y ~ I(x^2) + x)
+df <- tribble(
+  ~x, ~y,
+  1, 2.2,
+  2, NA,
+  3, 3.5,
+  4, 8.3,
+  NA, 10
+)
+# For excluding the NA values
+mod <- lm(y ~ x, data = df, na.action = na.exclude)
+nobs(mod)
