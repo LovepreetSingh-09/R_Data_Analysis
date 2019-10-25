@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571993433283.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2624796906",
+    "id" : "FE67A727",
+    "lastKnownWriteTime" : 1571995971,
+    "last_content_update" : 1571995971322,
+    "path" : "~/R/R_Data_Analysis/Model_3.R",
+    "project_path" : "Model_3.R",
+    "properties" : {
+        "cursorPosition" : "19,32",
+        "scrollLine" : "6",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
