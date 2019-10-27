@@ -4,13 +4,26 @@ author: "me"
 date: "10/27/2019"
 output: html_document
 ---
+```{r}
+knitr::opts_chunk$set(
+comment = "#>",
+collapse = TRUE
+)
+knitr::opts_chunk$set(
+echo = FALSE
+)
+```
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 smaller <- diamonds %>%
 filter(carat <= 2.5)
+comma <- function(x) format(x, digits = 2,big.mark = ",")
+comma(3452345)
+comma(.12358124331)
 ```
+
 
 
 We have data about `r nrow(diamonds)` diamonds. Only
