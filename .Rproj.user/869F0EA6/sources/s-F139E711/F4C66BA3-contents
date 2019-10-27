@@ -1,0 +1,36 @@
+---
+output: html_document
+params:
+  my_class: "suv"
+---
+
+```{r setup, include = FALSE}
+
+library(ggplot2)
+library(dplyr)
+class <- mpg %>% filter(class == params$my_class)
+```
+# Fuel economy for `r params$my_class`s
+```{r, message = FALSE}
+ggplot(class, aes(displ, hwy)) +
+geom_point() +
+geom_smooth(se = FALSE)
+```
+
+
+```{r setup, include = FALSE}
+rmarkdown::render(
+"Params_Markdown.Rmd",
+params = list(my_class = "suv")
+)
+reports <- tibble(
+class = unique(mpg$class),
+filename = stringr::str_c("Params_Markdown", class, ".html"),
+params = purrr::map(class, ~ list(my_class = .))
+)
+reports
+reports %>%
+select(output_file = filename, params) %>%
+purrr::pwalk(rmarkdown::render, input = "Params_Markdown.Rmd")
+```
+

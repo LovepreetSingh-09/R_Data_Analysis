@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572201418381.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4078437084",
+    "id" : "F4C66BA3",
+    "lastKnownWriteTime" : 1572202902,
+    "last_content_update" : 1572202902759,
+    "path" : "~/R/R_Data_Analysis/Params_Markdown.Rmd",
+    "project_path" : "Params_Markdown.Rmd",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "last_setup_crc32" : "F139E711c9119e3e",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 14,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
