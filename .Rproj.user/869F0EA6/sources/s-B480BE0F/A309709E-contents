@@ -1,0 +1,20 @@
+library(tidyverse)
+library(modelr)
+options(na.action = na.warn)
+library(nycflights13)
+library(lubridate)
+library(splines)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs( title = paste(
+      "Fuel efficiency generally decreases with engine size" ))
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs( title = paste( "Fuel efficiency generally decreases with engine size"),
+    subtitle = paste( "Two seaters (sports cars) are an exception because of their light weight" ),
+    caption = paste("Data from fueleconomy.gov")
+  )
