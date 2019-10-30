@@ -189,7 +189,7 @@ table3 %>%
   separate(rate, into = c("cases", "population"), sep = "/")
 
 # separate make the columns as char type by default
-# But we can change it to a better type using convvert=TRUE
+# But we can change it to a better type using convert=TRUE
 table3 %>%
   separate(
     rate,
