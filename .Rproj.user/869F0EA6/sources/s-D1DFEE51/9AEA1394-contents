@@ -128,6 +128,7 @@ has_noun <- sentences %>%
   head(10)
 has_noun
 has_noun %>% str_extract(noun)
+
 # str_match() makes matrix where 1st column is the match and the later are the split or parts of the match
 has_noun %>% str_match(noun)
 
