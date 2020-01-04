@@ -1,3 +1,4 @@
+
 library(tidyverse)
 library(lubridate)
 library(nycflights13)
@@ -22,6 +23,7 @@ rescale01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
 }
+
 range(2:20)
 x <- c(1:10, Inf)
 rescale01(x)
@@ -65,6 +67,7 @@ show_missings <- function(df) {
   cat("Missing values: ", n, "\n", sep = "")
   invisible(df)
 }
+
 x <- show_missings(mtcars)
 class(x)
 dim(x)
