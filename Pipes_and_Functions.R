@@ -71,6 +71,7 @@ show_missings <- function(df) {
 x <- show_missings(mtcars)
 class(x)
 dim(x)
+
 # add some NA values
 mtcars %>%
   show_missings() %>%
