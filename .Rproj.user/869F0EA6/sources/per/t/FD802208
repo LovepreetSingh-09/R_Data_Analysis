@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2262619463",
+    "hash" : "1836224510",
     "id" : "FD802208",
-    "lastKnownWriteTime" : 1571993422,
-    "last_content_update" : 1571993422939,
+    "lastKnownWriteTime" : 1578405804,
+    "last_content_update" : 1578405804369,
     "path" : "~/R/R_Data_Analysis/Model_2.R",
     "project_path" : "Model_2.R",
     "properties" : {
-        "cursorPosition" : "0,0",
+        "cursorPosition" : "4,0",
         "scrollLine" : "0",
         "tempName" : "Untitled1"
     },

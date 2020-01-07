@@ -10,6 +10,7 @@ models <- tibble(
   a1=runif(250,-20,40),
   a2=runif(250,-5,5)
 )
+
 models
 sim1
 ggplot(sim1,aes(x,y)) +
